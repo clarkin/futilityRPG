@@ -23,6 +23,10 @@
             <h4 class="off">Can you stand it?</h4>
         </div>
 
+        <div class="header-right off">
+            <h4>Section 1: <b>RACE</b></h4>
+        </div>
+
         <div class="intro">
             <p class="intro-title off">Welcome to the finest role playing computer game <b>ever made</b>!!</p>
             <div class="intro-features off">
@@ -37,7 +41,7 @@
             </div>
             <div class="intro-button off">
                 <p>But first - you must <b>create your character</b>..</p>
-                <button type="button" class="btn btn-custom" id="btnstart">Get Started</button>
+                <a class="btn btn-custom" id="btnstart">Get Started</a>
             </div>
         </div>
 
@@ -45,8 +49,30 @@
             Character creation: completed 0%
         </div>
 
-        <div class="creation-1 off">
-            <h3>Section 1: RACE</h3>
+        <div class="clearfix"></div>
+
+        <div class="step-race off">
+            <h2>Choose your RACE</h2>
+            <div class="btn-group btn-group-justified" data-toggle="buttons-radio">
+                <a class="btn btn-custom">Human</a>
+                <a class="btn btn-custom">Dwarf</a>
+                <a class="btn btn-custom">Elf</a>
+            </div>
+        </div>
+
+        <div class="step-subrace off">
+            <h3>What kind of DWARF?</h3>
+            <div class="btn-group btn-group-justified" data-toggle="buttons-radio">
+                <a class="btn btn-custom">Mountain Dwarf</a>
+                <a class="btn btn-custom">Dark Dwarf</a>
+                <a class="btn btn-custom">Mechanical Dwarf</a>
+            </div>
+        </div>
+
+        <div class="next-step off">
+            <input type="hidden" id="next-step-name" value="" />
+            <a id="give-up-button" class="btn btn-custom">Skip Character Creation</a>
+            <a id="next-section-button" class="btn btn-custom">Next Section</a>
         </div>
     </div>
 

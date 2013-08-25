@@ -1,17 +1,27 @@
 @import url(http://fonts.googleapis.com/css?family=Averia+Serif+Libre:400,700,700italic);
 @import url(http://fonts.googleapis.com/css?family=Lancelot);
 
+* {
+    
+}
+
 body {
     font-family: 'Lancelot', cursive;
     font-size: 14pt;
     color: #4B3800;
     padding-bottom: 40px;
+    padding-top: 20px;
     text-align: center;
     background-color: black;
 }
 
 h1, h2, h3, h4 {
     font-family: 'Averia Serif Libre', cursive;
+}
+
+a, a.btn, .btn-group>a.btn {
+    font-size: 18px;
+    transition: all 0.2s;
 }
 
 .hidden {
@@ -27,8 +37,67 @@ h1, h2, h3, h4 {
     height: 600px;
     margin: 0 auto;
     background-color: #FFC373;
-    padding-top: 40px;
+    position: relative;
 }
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Averia Serif Libre', cursive;
+    margin-top: 40px;
+    transition: all 1s;
+    float: left;
+    width: 100%;
+}
+    .header.docked {
+        margin-top: 10px;
+        width: 50%;
+    }
+    .header h1 {
+        margin-bottom: 0;
+    }
+    .header h4 {
+        font-style: italic;
+        margin: 0;
+    }
+
+.header-right {
+    float: right;
+    width: 50%;
+    overflow: hidden;
+    margin: 10px 0 20px 0;
+    height: 70px;
+}
+
+.intro .intro-features {
+    text-align: left;
+    width: 600px;
+    margin: 30px auto;
+    padding: 30px 0;
+}
+
+.progress-completed {
+    width: 100%;
+    float: left;
+    background-color: #DAA762;
+    padding: 5px 0;
+}
+
+.next-step {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: #DAA762;
+    padding: 10px 0;
+}
+    .next-step #give-up-button {
+        float: left;
+        margin-left: 20px;
+    }
+    .next-step #next-section-button {
+        float: right;
+        margin-right: 20px;
+    }
 
 .btn-custom {
   background-color: hsl(29, 83%, 18%) !important;
@@ -45,23 +114,4 @@ h1, h2, h3, h4 {
   color: #FFD8A3     !important;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.69);
   -webkit-font-smoothing: antialiased;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 20px;
-    font-family: 'Averia Serif Libre', cursive;
-}
-    .header h1 {
-        margin-bottom: 0;
-    }
-    .header h4 {
-        font-style: italic;
-        margin: 0;
-    }
-
-.intro .intro-features {
-    text-align: left;
-    max-width: 600px;
-    margin: 30px auto;
 }
