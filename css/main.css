@@ -21,7 +21,11 @@ h1, h2, h3, h4 {
 
 a, a.btn, .btn-group>a.btn {
     font-size: 18px;
-    transition: all 0.2s;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
 }
 
 .hidden {
@@ -45,9 +49,13 @@ a, a.btn, .btn-group>a.btn {
     margin-bottom: 20px;
     font-family: 'Averia Serif Libre', cursive;
     margin-top: 40px;
-    transition: all 1s;
     float: left;
     width: 100%;
+    -webkit-transition: all 1000ms ease;
+    -moz-transition: all 1000ms ease;
+    -ms-transition: all 1000ms ease;
+    -o-transition: all 1000ms ease;
+    transition: all 1000ms ease;
 }
     .header.docked {
         margin-top: 10px;
