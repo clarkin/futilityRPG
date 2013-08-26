@@ -2,6 +2,7 @@ var steps = [];
 var currentStep = 0;
 var thisStep;
 var thisSubStep;
+var SPEEDYMODE = false;
 
 $(document).ready(function () {
 
@@ -68,7 +69,7 @@ $(document).ready(function () {
             initSubStep(thisAnswer.subQuestion);
         } else {
             console.log("subquestion answered");
-            $('#next-section-button').removeClass('disabled');
+            chainIn(['.next-section-holder']);
         }
 
     });
@@ -103,7 +104,7 @@ var initStep = function (stepNo) {
     thisStep = steps[stepNo];
     console.log(thisStep);
 
-    $('#next-section-button').addClass('disabled');
+    $('.next-section-holder').fadeOut(300);
     $('.step-basic h2').html(thisStep.question);
     $('.step-basic .btn-group').html("");
     $.each(thisStep.answers, function (index, value) {
@@ -116,7 +117,7 @@ var initSubStep = function (question) {
     thisSubStep = question;
     console.log(question);
 
-    $('#next-section-button').addClass('disabled');
+    $('.next-section-holder').fadeOut(300);
     $('.step-basic-sub').fadeOut(300, function () {
         $('.step-basic-sub h3').html(question.question);
         $('.step-basic-sub .btn-group').html("");
@@ -131,6 +132,9 @@ var initSubStep = function (question) {
 
 var chainIn = function (toAnimate, ix) {
     var animateSpeed = 1500;
+    if (SPEEDYMODE) {
+        animateSpeed = 100;
+    }
 
     if (typeof ix === 'undefined') {
         ix = 0;
