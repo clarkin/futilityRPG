@@ -79,6 +79,9 @@ a, a.btn, .btn-group>a.btn {
     margin: 10px 0 20px 0;
     height: 70px;
 }
+    .header-right h3 {
+        line-height: 50px;
+    }
 
 .intro-title {
     clear: both;
@@ -101,8 +104,26 @@ a, a.btn, .btn-group>a.btn {
     width: 100%;
     float: left;
     background-color: #DAA762;
-    padding: 5px 0;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    font-size: 120%;
+    font-family: 'Averia Serif Libre', cursive;
 }
+    .progress-completed .bar {
+        width: 0%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #BA8E54;
+    }
+    .progress-completed .text {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 
 .next-step {
     width: 100%;
@@ -131,7 +152,7 @@ a, a.btn, .btn-group>a.btn {
         font-weight: normal;
     }
     .your-answer-holder.saving {
-        -webkit-transform: translate(200px, -490px) scale(0.1);
+        -webkit-transform: translate(-350px, -400px) scale(0.1);
         opacity: 0.1;
     }
 

@@ -1,14 +1,17 @@
+var ANIMATE_SPEED = 1500;
+var SPEEDYMODE = false;
+if (SPEEDYMODE) {
+    ANIMATE_SPEED = ANIMATE_SPEED / 10;
+}
+var ANIMATE_SPEED_OUT = ANIMATE_SPEED / 5;
+
 var steps = [];
 var currentStep = 0;
 var thisStep;
 var thisSubStep;
 var canProceed = false;
-var SPEEDYMODE = false;
-var ANIMATE_SPEED = 1500;
-if (SPEEDYMODE) {
-    ANIMATE_SPEED = ANIMATE_SPEED / 10;
-}
-var ANIMATE_SPEED_OUT = ANIMATE_SPEED / 5;
+var percentageComplete = 0;
+var totalSteps = 0;
 
 $(document).ready(function () {
 
@@ -26,21 +29,23 @@ $(document).ready(function () {
     q.addAnswerWithSub('Dwarf', 'What kind of DWARF?', ['Dark Duergar', 'Mountain Dwarf', 'Mechanical Dwarf']);
     steps.push(q);
 
+    totalSteps = steps.length;
+
     chainIn(['.header h1', '.header h4', '.intro-title', '.intro-features', '.intro-button']);
 
     $('#btnstart').click(function () {
-        //$('.intro').fadeOut(300, function () {
         chainOut(['.intro-button', '.intro-features', '.intro-title']);
         setTimeout(function () {
             $('.intro').hide();
             setTransition('.header', ANIMATE_SPEED);
             $('.header').addClass('docked');
 
-            initStep(currentStep);
-
             setTimeout(function () {
-                chainIn(['.header-right', '.progress-completed', '.step-basic', '.next-step']);
-            }, 1000);
+                chainIn(['.header-right', '.progress-completed', '.next-step']);
+                setTimeout(function () {
+                    initStep(currentStep);
+                }, ANIMATE_SPEED * 2);
+            }, ANIMATE_SPEED);
         }, ANIMATE_SPEED_OUT * 3);
 
     });
@@ -54,10 +59,17 @@ $(document).ready(function () {
             $('.next-section-holder').removeClass('fading-in');
             setTransition('.your-answer-holder', ANIMATE_SPEED);
             $('.your-answer-holder').addClass('saving');
+            chainOut(['.step-basic-sub', '.step-basic', '.progress-completed .text']);
+            currentStep++;
+            percentageComplete = currentStep / totalSteps;
+            setTransition('.progress-completed .bar', ANIMATE_SPEED);
+            $('.progress-completed .bar').css('width', percentageComplete * 100 + '%');
             
             setTimeout(function () {
                 setTransition('.your-answer-holder', 0);
                 $('.your-answer-holder').removeClass('fading-in').removeClass('saving');
+
+                initStep(currentStep);
             }, ANIMATE_SPEED);
         }
         
@@ -130,8 +142,6 @@ var resetAnswer = function () {
     canProceed = false;
     chainOut(['.next-section-holder', '.your-answer-holder']);
     $('.your-answer-holder').removeClass('saving');
-    //$('.next-section-holder').fadeOut(300);
-    //$('.your-answer-holder').fadeOut(300).removeClass('saving');
 }
 
 var checkAnswer = function (thisAnswer) {
@@ -145,13 +155,18 @@ var initStep = function (stepNo) {
     thisStep = steps[stepNo];
     //console.log(thisStep);
 
+    $('.progress-completed .section-number').text(stepNo + 1);
+    $('.progress-completed .percentage-complete').text(percentageComplete * 100);
+    chainIn(['.progress-completed .text']);
+
     resetAnswer();
     $('.step-basic h2').html(thisStep.question);
     $('.step-basic .btn-group').html("");
     $.each(thisStep.answers, function (index, value) {
         $('.step-basic .btn-group').append('<a class="btn btn-custom">' + value.answer + '</a>');
     });
-    
+
+    chainIn(['.step-basic']);
 }
 
 var initSubStep = function (question) {
@@ -192,8 +207,6 @@ var chainIn = function (toAnimate, ix, fadeIn) {
             $(thisElement).removeClass('fading-in');
         }
         setTimeout(function () {
-            //$(thisElement).hide();
-            //$(thisElement).removeClass('fading-in');
             chainIn(toAnimate, ix + 1, fadeIn);
         }, thisAnimateSpeed);
     }
