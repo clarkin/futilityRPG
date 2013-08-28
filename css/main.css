@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Lancelot);
 
 * {
-    
+
 }
 
 body {
@@ -33,7 +33,13 @@ a, a.btn, .btn-group>a.btn {
 }
 
 .off {
-    display: none;
+    
+    opacity: 0;
+}
+
+.fading-in {
+    
+    opacity: 1;
 }
 
 .container {
@@ -51,11 +57,6 @@ a, a.btn, .btn-group>a.btn {
     margin-top: 40px;
     float: left;
     width: 100%;
-    -webkit-transition: all 1000ms ease;
-    -moz-transition: all 1000ms ease;
-    -ms-transition: all 1000ms ease;
-    -o-transition: all 1000ms ease;
-    transition: all 1000ms ease;
 }
     .header.docked {
         margin-top: 10px;
@@ -70,19 +71,31 @@ a, a.btn, .btn-group>a.btn {
     }
 
 .header-right {
-    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
     width: 50%;
     overflow: hidden;
     margin: 10px 0 20px 0;
     height: 70px;
 }
 
-.intro .intro-features {
-    text-align: left;
-    width: 600px;
-    margin: 30px auto;
-    padding: 30px 0;
+.intro-title {
+    clear: both;
+    margin: 30px auto 0 auto;
 }
+
+.intro {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+    .intro .intro-features {
+        text-align: left;
+        width: 600px;
+        margin: 30px auto;
+        padding: 30px 0;
+    }
 
 .progress-completed {
     width: 100%;
@@ -102,9 +115,24 @@ a, a.btn, .btn-group>a.btn {
         float: left;
         margin-left: 20px;
     }
-    .next-step #next-section-button {
+    .next-step .next-section-holder {
         float: right;
         margin-right: 20px;
+    }
+
+.your-answer-holder {
+    width: 100%;
+    position: absolute;
+    bottom: 50px;
+    padding: 0;
+    text-align: center;
+}
+    .your-answer-holder h3 {
+        font-weight: normal;
+    }
+    .your-answer-holder.saving {
+        -webkit-transform: translate(200px, -490px) scale(0.1);
+        opacity: 0.1;
     }
 
 .btn-custom {
