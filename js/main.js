@@ -45,11 +45,39 @@ $(document).ready(function () {
     q.type = 'textbox';
     steps.push(q);
 
+    q = createQuestion('Choose your ALIGNMENT');
+    q.addAnswersArray(['Lawful Good', 'Chaotic Good', 'Neutral', 'Lawful Evil', 'Chaotic Evil']);
+    steps.push(q);
+
+    //roll for stats here
+
+    /*
+    q = createQuestion('Choose your BIRTH SIGN');
+    q.addAnswerWithSub('Omen', 'What kind of OMEN?', ['Thunder', 'Ice', 'Empire', 'Jungle', 'Plainswalker']);
+    q.addAnswerWithSub('Starsign', 'What kind of FIGHTER?', ['Desert', 'Ice', 'Empire', 'Jungle', 'Plainswalker']);
+    q.addAnswerWithSub('Fighter', 'What kind of FIGHTER?', ['Desert', 'Ice', 'Empire', 'Jungle', 'Plainswalker']);
+    steps.push(q);
+    */
+
+    q = createQuestion('Choose your PERSONALITY');
+    q.addAnswersArray(['Optimistic', 'Unscrupulous', 'Spontaneous', 'Cautious', 'Stubborn', 'Agreeable', 'Reserved', 'Gruff']);
+    steps.push(q);
+
+    q = createQuestion('Choose your MOTIVATION');
+    q.addAnswersArray(['Honor', 'Wealth', 'Service', 'Hedonism', 'Enslavement', 'Geas', 'Power', 'Education', 'Liberation']);
+    steps.push(q);
+
+    q = createQuestion('Choose your SENSE OF HUMOUR');
+    q.addAnswersArray(['Crude', 'Dry', 'Slapstick', 'Cynical', 'Pranks', 'Mean-Spirited', 'None']);
+    steps.push(q);
+
     /*
     q = createQuestion('Choose your CLASS');
     q.addAnswerWithSub('Fighter', 'What kind of FIGHTER?', ['Desert', 'Ice', 'Empire', 'Jungle', 'Plainswalker']);
     steps.push(q);
     */
+
+    
 
     totalSteps = steps.length;
 
