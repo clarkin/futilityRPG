@@ -125,6 +125,32 @@ a, a.btn, .btn-group>a.btn {
         left: 0;
     }
 
+.steps-holder {
+    clear: both;
+    display: none;
+    position: relative;
+    width: 800px;
+    height: 410px;
+}
+    .steps-holder .step-basic {
+        position: absolute;
+        width: 800px;
+        height: 100px;
+        overflow: hidden;
+        top: 145px;
+        z-index: 20;
+    }
+    .steps-holder .step-basic-sub {
+        position: absolute;
+        width: 800px;
+        height: 100px;
+        overflow: hidden;
+        top: 145px;
+    }
+    .steps-holder .docked {
+        -webkit-transform: translate(0, -130px) scale(0.8);
+    }
+
 .next-step {
     width: 100%;
     position: absolute;

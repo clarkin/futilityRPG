@@ -1,5 +1,5 @@
 var ANIMATE_SPEED = 1500;
-var SPEEDYMODE = false;
+var SPEEDYMODE = true;
 if (SPEEDYMODE) {
     ANIMATE_SPEED = ANIMATE_SPEED / 10;
 }
@@ -37,6 +37,7 @@ $(document).ready(function () {
         chainOut(['.intro-button', '.intro-features', '.intro-title']);
         setTimeout(function () {
             $('.intro').hide();
+            $('.steps-holder').show();
             setTransition('.header', ANIMATE_SPEED);
             $('.header').addClass('docked');
 
@@ -99,13 +100,14 @@ $(document).ready(function () {
             });
         }
         
-        console.log('clicked on', thisAnswer);
-
+        //console.log('clicked on', thisAnswer);
         if (thisAnswer.subQuestion !== undefined) {
-            console.log("subquestion: ", thisAnswer.subQuestion);
+            //console.log("subquestion: ", thisAnswer.subQuestion);
+            setTransition('.step-basic', ANIMATE_SPEED_OUT);
+            $(this).closest('.step-basic').addClass('docked');
             initSubStep(thisAnswer.subQuestion);
         } else {
-            console.log("subquestion answered");
+            //console.log("subquestion answered");
             checkAnswer(thisAnswer);
             
         }
@@ -152,21 +154,28 @@ var checkAnswer = function (thisAnswer) {
 }
 
 var initStep = function (stepNo) {
-    thisStep = steps[stepNo];
-    //console.log(thisStep);
+    if (stepNo < steps.length) {
+        thisStep = steps[stepNo];
+        //console.log(thisStep);
 
-    $('.progress-completed .section-number').text(stepNo + 1);
-    $('.progress-completed .percentage-complete').text(percentageComplete * 100);
-    chainIn(['.progress-completed .text']);
+        $('.progress-completed .section-number').text('Section ' + (stepNo + 1) + ' - ');
+        $('.progress-completed .percentage-complete').text('Complete ' + (percentageComplete * 100) + '%');
+        chainIn(['.progress-completed .text']);
 
-    resetAnswer();
-    $('.step-basic h2').html(thisStep.question);
-    $('.step-basic .btn-group').html("");
-    $.each(thisStep.answers, function (index, value) {
-        $('.step-basic .btn-group').append('<a class="btn btn-custom">' + value.answer + '</a>');
-    });
+        resetAnswer();
+        $('.step-basic').removeClass('docked');
+        $('.step-basic h2').html(thisStep.question);
+        $('.step-basic .btn-group').html("");
+        $.each(thisStep.answers, function (index, value) {
+            $('.step-basic .btn-group').append('<a class="btn btn-custom">' + value.answer + '</a>');
+        });
 
-    chainIn(['.step-basic']);
+        chainIn(['.step-basic']);
+    } else {
+        $('.progress-completed .section-number').text('');
+        $('.progress-completed .percentage-complete').text('Complete ' + (percentageComplete * 100) + '%');
+        chainIn(['.progress-completed .text']);
+    }
 }
 
 var initSubStep = function (question) {
@@ -175,7 +184,7 @@ var initSubStep = function (question) {
     resetAnswer();
     chainOut(['.step-basic-sub']);
     setTimeout(function () {
-        $('.step-basic-sub h3').html(question.question);
+        $('.step-basic-sub h2').html(question.question);
         $('.step-basic-sub .btn-group').html("");
         $.each(question.answers, function (index, value) {
             $('.step-basic-sub .btn-group').append('<a class="btn btn-custom">' + value.answer + '</a>');
