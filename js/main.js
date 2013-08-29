@@ -10,6 +10,7 @@ var currentStep = 0;
 var thisStep;
 var thisSubStep;
 var canProceed = false;
+var isFinished = false;
 var percentageComplete = 0;
 var totalSteps = 0;
 
@@ -48,11 +49,20 @@ $(document).ready(function () {
                 }, ANIMATE_SPEED * 2);
             }, ANIMATE_SPEED);
         }, ANIMATE_SPEED_OUT * 3);
-
     });
 
-    $('#next-section-button').click(function () {
-        event.preventDefault();
+    $('#give-up-button').click(function (e) {
+        e.preventDefault();
+
+        if (!isFinished) {
+            showEndGame();
+        }
+
+        return false;
+    });
+
+    $('#next-section-button').click(function (e) {
+        e.preventDefault();
 
         if (canProceed) {
             canProceed = false;
@@ -76,8 +86,6 @@ $(document).ready(function () {
         
         return false;
     });
-
-    
 
     $('.step-basic, .step-basic-sub').on('click', 'a', function (e) {
         var thisText = this.text;
@@ -175,6 +183,7 @@ var initStep = function (stepNo) {
         $('.progress-completed .section-number').text('');
         $('.progress-completed .percentage-complete').text('Complete ' + (percentageComplete * 100) + '%');
         chainIn(['.progress-completed .text']);
+        showEndGame();
     }
 }
 
@@ -192,7 +201,13 @@ var initSubStep = function (question) {
 
         chainIn(['.step-basic-sub']);
     }, ANIMATE_SPEED_OUT);
+}
 
+var showEndGame = function () {
+    isFinished = true;
+    chainOut(['.step-basic-sub', '.step-basic', '.next-step']);
+    $('.game-over h3 b').text((percentageComplete * 100) + '%');
+    chainIn(['.game-over']);
 }
 
 var chainIn = function (toAnimate, ix, fadeIn) {
