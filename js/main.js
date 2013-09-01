@@ -1,5 +1,5 @@
 var ANIMATE_SPEED = 1500;
-var ROLLBACK_MODIFIER = 5;
+var ROLLBACK_MODIFIER = 500;
 var SPEEDYMODE = true;
 if (SPEEDYMODE) {
     ANIMATE_SPEED = ANIMATE_SPEED / 10;
@@ -21,7 +21,7 @@ var totalSteps = 0;
 $(document).ready(function () {
 
     var q;
-
+    
     q = createQuestion('RACE');
     q.addAnswerWithSub('Human', 'What kind of HUMAN?', ['Desert Nomad', 'Ice Barbarian', 'Empire Citizen', 'Jungle Tribesman', 'Plainswalker']);
     q.addAnswerWithSub('Elf', 'What kind of ELF?', ['Dark Drow', 'Sylvan Elf', 'Sea Elf', 'High Elf', 'Cosplay Elf']);
@@ -36,6 +36,10 @@ $(document).ready(function () {
 
     q = createQuestion('SEX');
     q.addAnswersArray(['Male', 'Female', 'It\'s Complicated']);
+    steps.push(q);
+
+    q = createQuestion('STATS');
+    q.type = 'stats';
     steps.push(q);
 
     q = createQuestion('CLASS');
@@ -112,6 +116,25 @@ $(document).ready(function () {
         return false;
     });
 
+    $('#btnstats').click(function (e) {
+        e.preventDefault();
+
+        lastAnswer = { question: lastQuestionTitle, answer: [] };
+        $('.stats-holder input[type=text]').each(function () {
+            var diceRoll = rollD6() + rollD6() + rollD6();
+            $(this).val(diceRoll);
+            var thisStatName = $(this).prev().text();
+            thisStatName = thisStatName.substring(0, thisStatName.length - 1)
+            lastAnswer.answer.push({ stat: thisStatName, value: diceRoll });
+        });
+        //console.log(lastAnswer);
+        
+        chainIn(['.next-section-holder']);
+        canProceed = true;
+        
+        return false;
+    });
+
     $('#next-section-button').click(function (e) {
         e.preventDefault();
 
@@ -120,7 +143,10 @@ $(document).ready(function () {
 
             //random chance of rollback
             var chance = parseInt(Math.random() * (totalSteps + ROLLBACK_MODIFIER));
-            console.log('chance: ' + chance + ' < currentStep: ' + currentStep + ' ?');
+            //console.log('chance: ' + chance + ' < currentStep: ' + currentStep + ' ?');
+            //if (currentStep == 2) {
+            //    chance = 0;
+            //}
 
             if (chance < currentStep) {
                 rollbackToStep(chance);
@@ -235,8 +261,22 @@ var checkAnswer = function (thisAnswer) {
 var rollbackToStep = function (newStep) {
     chainOut(['.your-answer-holder', '.step-basic-sub', '.step-basic', '.next-section-holder', '.progress-completed .text']);
     setTimeout(function () {
-        $('.errors h3').text('Sorry, you can\'t have ' + lastAnswer.question + ':' + lastAnswer.answer + ' with ' + answers[newStep].question + ':' + answers[newStep].answer + '. Rolling back.');
-        chainIn(['.errors']); 
+        var shownLastAnswer, rollbackAnswer;
+        if (typeof lastAnswer.answer !== 'string') {
+            var whichStat = Math.floor(Math.random() * (5 - 0 + 1) + 0);
+            shownLastAnswer = lastAnswer.answer[whichStat].stat + ':' + lastAnswer.answer[whichStat].value;
+        } else {
+            shownLastAnswer = lastAnswer.question + ':' + lastAnswer.answer;
+        }
+        if (typeof answers[newStep].answer !== 'string') {
+            var whichStat = Math.floor(Math.random() * (5 - 0 + 1) + 0);
+            rollbackAnswer = answers[newStep].answer[whichStat].stat + ':' + answers[newStep].answer[whichStat].value;
+        } else {
+            rollbackAnswer = answers[newStep].question + ':' + answers[newStep].answer;
+        }
+        
+        $('.errors h3').text('Sorry, you can\'t have ' + shownLastAnswer + ' with ' + rollbackAnswer + '. Rolling back.');
+        chainIn(['.errors']);
         setTimeout(function () {
             chainOut(['.errors']);
             answers.splice(newStep, answers.length);
@@ -261,7 +301,7 @@ var initStep = function (stepNo) {
         lastQuestionTitle = thisStep.question;
         $('.step-basic').removeClass('docked');
         $('.step-basic h2').html('Choose your ' + thisStep.question);
-        $('.step-basic .btn-group').html("");
+        $('.step-basic .btn-group').html('');
         $('.step-basic .btn-group').hide();
         $.each(thisStep.answers, function (index, value) {
             $('.step-basic .btn-group').show();
@@ -269,8 +309,14 @@ var initStep = function (stepNo) {
         });
         $('.step-basic .text-holder').hide();
         $('.step-basic .text-holder input').val('');
+        $('.step-basic .stats-holder').hide();
+        $('.step-basic .stats-holder input').val('');
+        $('.step-basic').removeClass('statsmode');
         if (thisStep.type === 'textbox') {
             $('.step-basic .text-holder').show();
+        } else if (thisStep.type === 'stats') {
+            $('.step-basic').addClass('statsmode');
+            $('.step-basic .stats-holder').show();
         }
 
         chainIn(['.progress-completed .text', '.step-basic']);
@@ -333,6 +379,10 @@ var chainIn = function (toAnimate, ix, fadeIn) {
 
 var chainOut = function (toAnimate) {
     chainIn(toAnimate, 0, false);
+}
+
+var rollD6 = function () {
+    return Math.floor(Math.random() * (6 - 1 + 1) + 1);
 }
 
 var setTransition = function (element, animationSpeed) {

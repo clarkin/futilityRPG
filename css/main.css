@@ -19,6 +19,10 @@ h1, h2, h3, h4 {
     font-family: 'Averia Serif Libre', cursive;
 }
 
+input[type=text] {
+    background-color: #FFE1B8;
+}
+
 a, a.btn, .btn-group>a.btn {
     font-size: 18px;
     -webkit-transition: all 200ms ease;
@@ -144,6 +148,39 @@ a, a.btn, .btn-group>a.btn {
         top: 145px;
         z-index: 20;
     }
+        .steps-holder .step-basic.statsmode {
+            height: 350px;
+            top: 30px;
+        }
+        .steps-holder .step-basic .stats-holder {
+            width: 500px;
+            margin-left: 150px;
+            padding-top: 20px;
+            float: left;
+        }
+            .steps-holder .step-basic .stats-holder label {
+                float: left;
+                width: 150px;
+                font-size: 140%;
+                height: 30px;
+                line-height: 30px;
+                margin-left: 50px;
+            }
+                .steps-holder .step-basic .stats-holder label.newline {
+                    clear: both;
+                    margin-left: 0;
+                }
+            .steps-holder .step-basic .stats-holder input {
+                float: left;
+                width: 50px;
+            }
+            .steps-holder .step-basic .stats-holder a.btn {
+                margin-top: 20px;
+                margin-left: 190px;
+                clear: both;
+                float: left;
+            }
+
     .steps-holder .step-basic-sub {
         position: absolute;
         width: 800px;
