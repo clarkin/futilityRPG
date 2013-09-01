@@ -1,14 +1,18 @@
 var ANIMATE_SPEED = 1500;
-var SPEEDYMODE = false;
+var ROLLBACK_MODIFIER = 5;
+var SPEEDYMODE = true;
 if (SPEEDYMODE) {
     ANIMATE_SPEED = ANIMATE_SPEED / 10;
 }
 var ANIMATE_SPEED_OUT = ANIMATE_SPEED / 5;
 
 var steps = [];
+var answers = [];
 var currentStep = 0;
 var thisStep;
 var thisSubStep;
+var lastQuestionTitle;
+var lastAnswer;
 var canProceed = false;
 var isFinished = false;
 var percentageComplete = 0;
@@ -18,7 +22,7 @@ $(document).ready(function () {
 
     var q;
 
-    q = createQuestion('Choose your RACE');
+    q = createQuestion('RACE');
     q.addAnswerWithSub('Human', 'What kind of HUMAN?', ['Desert Nomad', 'Ice Barbarian', 'Empire Citizen', 'Jungle Tribesman', 'Plainswalker']);
     q.addAnswerWithSub('Elf', 'What kind of ELF?', ['Dark Drow', 'Sylvan Elf', 'Sea Elf', 'High Elf', 'Cosplay Elf']);
     q.addAnswerWithSub('Dwarf', 'What kind of DWARF?', ['Dark Duergar', 'Mountain Dwarf', 'Mechanical Dwarf', 'Stereotypical Dwarf']);
@@ -30,22 +34,22 @@ $(document).ready(function () {
     q.addAnswerWithSub('Demon', 'What kind of DEMON?', ['Succubus', 'Vrock', 'Quasit', 'Nalfeshnee', 'Dretch', 'Balor']);
     steps.push(q);
 
-    q = createQuestion('Choose your SEX');
+    q = createQuestion('SEX');
     q.addAnswersArray(['Male', 'Female', 'It\'s Complicated']);
     steps.push(q);
 
-    q = createQuestion('Choose your CLASS');
+    q = createQuestion('CLASS');
     q.addAnswerWithSub('Fighter', 'What kind of FIGHTER?', ['Warrior', 'Paladin', 'Thug', 'Barbarian', 'Ranger', 'Monk', 'Cavalier', 'Blackguard']);
     q.addAnswerWithSub('Magician', 'What kind of MAGICIAN?', ['Wizard', 'Illusionist', 'Necromancer', 'Abjurer', 'Sorcerer', 'Sourcerer', 'Emomancer', 'Mathemagician']);
     q.addAnswerWithSub('Priest', 'What kind of PRIEST?', ['Cleric', 'Druid', 'Warpriest', 'Witch']);
     q.addAnswerWithSub('Rogue', 'What kind of Rogue?', ['Thief', 'Assassin', 'Bard', 'Swashbuckler', 'Cat Burglar', 'Scout', 'Rouge']);
     steps.push(q);
 
-    q = createQuestion('Choose your NAME');
+    q = createQuestion('NAME');
     q.type = 'textbox';
     steps.push(q);
 
-    q = createQuestion('Choose your ALIGNMENT');
+    q = createQuestion('ALIGNMENT');
     q.addAnswersArray(['Lawful Good', 'Chaotic Good', 'Neutral', 'Lawful Evil', 'Chaotic Evil']);
     steps.push(q);
 
@@ -59,15 +63,15 @@ $(document).ready(function () {
     steps.push(q);
     */
 
-    q = createQuestion('Choose your PERSONALITY');
+    q = createQuestion('PERSONALITY');
     q.addAnswersArray(['Optimistic', 'Unscrupulous', 'Spontaneous', 'Cautious', 'Stubborn', 'Agreeable', 'Reserved', 'Gruff']);
     steps.push(q);
 
-    q = createQuestion('Choose your MOTIVATION');
+    q = createQuestion('MOTIVATION');
     q.addAnswersArray(['Honor', 'Wealth', 'Service', 'Hedonism', 'Enslavement', 'Geas', 'Power', 'Education', 'Liberation']);
     steps.push(q);
 
-    q = createQuestion('Choose your SENSE OF HUMOUR');
+    q = createQuestion('SENSE OF HUMOUR');
     q.addAnswersArray(['Crude', 'Dry', 'Slapstick', 'Cynical', 'Pranks', 'Mean-Spirited', 'None']);
     steps.push(q);
 
@@ -77,10 +81,7 @@ $(document).ready(function () {
     steps.push(q);
     */
 
-    
-
     totalSteps = steps.length;
-
     chainIn(['.header h1', '.header h4', '.intro-title', '.intro-features', '.intro-button']);
 
     $('#btnstart').click(function () {
@@ -116,22 +117,31 @@ $(document).ready(function () {
 
         if (canProceed) {
             canProceed = false;
-            
-            $('.next-section-holder').removeClass('fading-in');
-            setTransition('.your-answer-holder', ANIMATE_SPEED);
-            $('.your-answer-holder').addClass('saving');
-            chainOut(['.step-basic-sub', '.step-basic', '.progress-completed .text']);
-            currentStep++;
-            percentageComplete = currentStep / totalSteps;
-            setTransition('.progress-completed .bar', ANIMATE_SPEED);
-            $('.progress-completed .bar').css('width', percentageComplete * 100 + '%');
-            
-            setTimeout(function () {
-                setTransition('.your-answer-holder', 0);
-                $('.your-answer-holder').removeClass('fading-in').removeClass('saving');
 
-                initStep(currentStep);
-            }, ANIMATE_SPEED);
+            //random chance of rollback
+            var chance = parseInt(Math.random() * (totalSteps + ROLLBACK_MODIFIER));
+            console.log('chance: ' + chance + ' < currentStep: ' + currentStep + ' ?');
+
+            if (chance < currentStep) {
+                rollbackToStep(chance);
+            } else {
+                answers.push(lastAnswer);
+                $('.next-section-holder').removeClass('fading-in');
+                setTransition('.your-answer-holder', ANIMATE_SPEED);
+                $('.your-answer-holder').addClass('saving');
+                chainOut(['.step-basic-sub', '.step-basic', '.progress-completed .text']);
+                currentStep++;
+                percentageComplete = currentStep / totalSteps;
+                setTransition('.progress-completed .bar', ANIMATE_SPEED);
+                $('.progress-completed .bar').css('width', percentageComplete * 100 + '%');
+
+                setTimeout(function () {
+                    setTransition('.your-answer-holder', 0);
+                    $('.your-answer-holder').removeClass('fading-in').removeClass('saving');
+
+                    initStep(currentStep);
+                }, ANIMATE_SPEED);
+            }
         }
         
         return false;
@@ -170,9 +180,9 @@ $(document).ready(function () {
         }
     });
 
-    $('.step-basic .form-holder input[type=text]').on('input change keydown', function () {
+    $('.step-basic .text-holder input[type=text]').on('input change keydown', function () {
         if ($(this).val().length > 0) {
-            checkAnswer({ answer: $(this).val() });
+            checkAnswer({ answer: $(this).val() }); 
         }
     });
 
@@ -215,31 +225,52 @@ var resetAnswer = function () {
 
 var checkAnswer = function (thisAnswer) {
     //console.log(thisAnswer.answer);
+    lastAnswer = { question: lastQuestionTitle, answer: thisAnswer.answer };
+
     $('.your-answer-holder h3').html("You chose <b>" + thisAnswer.answer + "</b>");
     chainIn(['.your-answer-holder', '.next-section-holder']);
     canProceed = true;
 }
 
+var rollbackToStep = function (newStep) {
+    chainOut(['.your-answer-holder', '.step-basic-sub', '.step-basic', '.next-section-holder', '.progress-completed .text']);
+    setTimeout(function () {
+        $('.errors h3').text('Sorry, you can\'t have ' + lastAnswer.question + ':' + lastAnswer.answer + ' with ' + answers[newStep].question + ':' + answers[newStep].answer + '. Rolling back.');
+        chainIn(['.errors']); 
+        setTimeout(function () {
+            chainOut(['.errors']);
+            answers.splice(newStep, answers.length);
+            currentStep = newStep;
+            percentageComplete = currentStep / totalSteps;
+            $('.progress-completed .bar').css('width', percentageComplete * 100 + '%');
+            initStep(currentStep);
+        }, ANIMATE_SPEED * 5); 
+    }, ANIMATE_SPEED_OUT * 3);
+}
+
 var initStep = function (stepNo) {
     if (stepNo < steps.length) {
         thisStep = steps[stepNo];
+        thisSubStep = null;
         //console.log(thisStep);
 
         $('.progress-completed .section-number').text('Section ' + (stepNo + 1) + ' - ');
         $('.progress-completed .percentage-complete').text('Complete ' + (percentageComplete * 100).toFixed(2) + '%');
 
         resetAnswer();
+        lastQuestionTitle = thisStep.question;
         $('.step-basic').removeClass('docked');
-        $('.step-basic h2').html(thisStep.question);
+        $('.step-basic h2').html('Choose your ' + thisStep.question);
         $('.step-basic .btn-group').html("");
         $('.step-basic .btn-group').hide();
         $.each(thisStep.answers, function (index, value) {
             $('.step-basic .btn-group').show();
             $('.step-basic .btn-group').append('<a class="btn btn-custom">' + value.answer + '</a>');
         });
-        $('.step-basic .form-holder').hide();
+        $('.step-basic .text-holder').hide();
+        $('.step-basic .text-holder input').val('');
         if (thisStep.type === 'textbox') {
-            $('.step-basic .form-holder').show();
+            $('.step-basic .text-holder').show();
         }
 
         chainIn(['.progress-completed .text', '.step-basic']);

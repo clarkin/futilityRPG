@@ -168,6 +168,16 @@ a, a.btn, .btn-group>a.btn {
         .steps-holder .game-over h3 {
             font-weight: normal;
         }
+    .steps-holder .errors {
+        position: absolute;
+        width: 600px;
+        height: 300px;
+        top: 100px;
+        left: 100px;
+    }
+        .steps-holder .errors h3 {
+            font-weight: normal;
+        }
 
 .next-step {
     width: 100%;
