@@ -1,6 +1,6 @@
 var ANIMATE_SPEED = 1500;
-var ROLLBACK_MODIFIER = 500;
-var SPEEDYMODE = true;
+var ROLLBACK_MODIFIER = 8;
+var SPEEDYMODE = false;
 if (SPEEDYMODE) {
     ANIMATE_SPEED = ANIMATE_SPEED / 10;
 }
@@ -57,26 +57,32 @@ $(document).ready(function () {
     q.addAnswersArray(['Lawful Good', 'Chaotic Good', 'Neutral', 'Lawful Evil', 'Chaotic Evil']);
     steps.push(q);
 
-    //roll for stats here
-
-    /*
-    q = createQuestion('Choose your BIRTH SIGN');
-    q.addAnswerWithSub('Omen', 'What kind of OMEN?', ['Thunder', 'Ice', 'Empire', 'Jungle', 'Plainswalker']);
-    q.addAnswerWithSub('Starsign', 'What kind of FIGHTER?', ['Desert', 'Ice', 'Empire', 'Jungle', 'Plainswalker']);
-    q.addAnswerWithSub('Fighter', 'What kind of FIGHTER?', ['Desert', 'Ice', 'Empire', 'Jungle', 'Plainswalker']);
+    q = createQuestion('SKILL FOCUS');
+    q.addAnswerWithSub('Weapon Skills', 'What kind of WEAPON SKILL?', ['Two Weapon Fighting', 'Power Attack', 'Cleave', 'Rapid Shot', 'Disarm']);
+    q.addAnswerWithSub('Acrobatic Skills', 'What kind of ACROBATIC SKILL?', ['Dodge', 'Deft Hands', 'Quick Draw', 'Weapon Finesse', 'Combat Reflexes', 'Tumbling']);
+    q.addAnswerWithSub('Magic Skills', 'What kind of MAGIC SKILL?', ['Spell Penetration', 'Iron Will', 'Combat Casting', 'Brew Potion', 'Silent Spell']);
     steps.push(q);
-    */
 
     q = createQuestion('PERSONALITY');
     q.addAnswersArray(['Optimistic', 'Unscrupulous', 'Spontaneous', 'Cautious', 'Stubborn', 'Agreeable', 'Reserved', 'Gruff']);
     steps.push(q);
 
-    q = createQuestion('MOTIVATION');
-    q.addAnswersArray(['Honor', 'Wealth', 'Service', 'Hedonism', 'Enslavement', 'Geas', 'Power', 'Education', 'Liberation']);
+    q = createQuestion('QUIRK OR HOBBY');
+    q.addAnswerWithSub('Quirk', 'What kind of QUIRK?', ['Constant Eating', 'Walking Backwards', 'Needless Apologising', 'Smelling Things', 'Compulsive Lying']);
+    q.addAnswerWithSub('Tic', 'What kind of TIC?', ['Mumbling', 'Whistling', 'Pacing', 'Whistling', 'Foot Tapping', 'Coin Flipping', 'Counting']);
+    q.addAnswerWithSub('Hobby', 'What kind of HOBBY?', ['Juggling', 'Brewing', 'Falconry', 'Pipe Smoking', 'Birdwatching', 'Sewing', 'Wrestling', 'Cooking']);
     steps.push(q);
 
     q = createQuestion('SENSE OF HUMOUR');
     q.addAnswersArray(['Crude', 'Dry', 'Slapstick', 'Cynical', 'Pranks', 'Mean-Spirited', 'None']);
+    steps.push(q);
+
+    q = createQuestion('PROFESSION');
+    q.addAnswersArray(['Butcher', 'Engraver', 'Falconer', 'Herbalist', 'Undertaker', 'Ships Captain', 'Miner', 'Maidservant']);
+    steps.push(q);
+
+    q = createQuestion('DISORDER');
+    q.addAnswersArray(['Depression', 'Bipolar', 'Masochism', 'Paranoia', 'Schizophrenia', 'Multiple Personalities', 'None']);
     steps.push(q);
 
     /*
