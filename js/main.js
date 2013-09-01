@@ -223,7 +223,7 @@ var checkAnswer = function (thisAnswer) {
 var initStep = function (stepNo) {
     if (stepNo < steps.length) {
         thisStep = steps[stepNo];
-        console.log(thisStep);
+        //console.log(thisStep);
 
         $('.progress-completed .section-number').text('Section ' + (stepNo + 1) + ' - ');
         $('.progress-completed .percentage-complete').text('Complete ' + (percentageComplete * 100).toFixed(2) + '%');
@@ -306,7 +306,8 @@ var chainOut = function (toAnimate) {
 
 var setTransition = function (element, animationSpeed) {
     $(element).css('-webkit-transition', 'all ' + animationSpeed + 'ms ease, opacity ' + animationSpeed + 'ms ease-out ' + animationSpeed / 4 + 'ms');
-    $(element).css('-moz-transition', 'all ' + animationSpeed + 'ms ease, opacity ' + animationSpeed + 'ms ease-out ' + animationSpeed / 4 + 'ms');
+    //$(element).css('-moz-transition', 'all ' + animationSpeed + 'ms ease, opacity ' + animationSpeed + 'ms ease-out ' + animationSpeed / 4 + 'ms');
+    $(element).css('-moz-transition', 'all ' + animationSpeed + 'ms ease'); //workaround for FF
     $(element).css('-ms-transition', 'all ' + animationSpeed + 'ms ease, opacity ' + animationSpeed + 'ms ease-out ' + animationSpeed / 4 + 'ms');
     $(element).css('-o-transition', 'all ' + animationSpeed + 'ms ease, opacity ' + animationSpeed + 'ms ease-out ' + animationSpeed / 4 + 'ms');
     $(element).css('transition', 'all ' + animationSpeed + 'ms ease, opacity ' + animationSpeed + 'ms ease-out ' + animationSpeed / 4 + 'ms');
