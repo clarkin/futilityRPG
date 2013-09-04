@@ -1,29 +1,36 @@
 @import url(http://fonts.googleapis.com/css?family=Averia+Serif+Libre:400,700,700italic);
 @import url(http://fonts.googleapis.com/css?family=Lancelot);
 
-* {
-
-}
-
-body {
+#game-container {
+    width: 800px;
+    height: 600px;
+    margin: 40px auto;
+    background-color: #FFC373;
+    position: relative;
+    overflow: hidden;
     font-family: 'Lancelot', cursive;
     font-size: 14pt;
     color: #4B3800;
+    text-align: center;
+}
+
+body {
     padding-bottom: 40px;
     padding-top: 20px;
-    text-align: center;
+    font: normal 62.5% Verdana, Arial, Helvetica, sans-serif;
+    color: #ccc;
     background-color: black;
 }
 
-h1, h2, h3, h4 {
+#game-container h1, #game-container h2, #game-container h3, #game-container h4 {
     font-family: 'Averia Serif Libre', cursive;
 }
 
-input[type=text] {
+#game-container input[type=text] {
     background-color: #FFE1B8;
 }
 
-a, a.btn, .btn-group>a.btn {
+#game-container a, #game-container a.btn, #game-container .btn-group>a.btn {
     font-size: 18px;
     -webkit-transition: all 200ms ease;
     -moz-transition: all 200ms ease;
@@ -32,33 +39,26 @@ a, a.btn, .btn-group>a.btn {
     transition: all 200ms ease;
 }
 
-.hidden {
+#game-container .hidden {
     visibility: hidden;
 }
 
-.off {
+#game-container .off {
     margin-left: 800px;
     opacity: 0;
 }
-    .off.noswing {
+    #game-container .off.noswing {
         margin-left: 0;
     }
 
-.fading-in {
+#game-container .fading-in {
     margin-left: 0;
     opacity: 1;
 }
 
-.container {
-    width: 800px;
-    height: 600px;
-    margin: 0 auto;
-    background-color: #FFC373;
-    position: relative;
-    overflow: hidden;
-}
 
-.header {
+
+#game-container .header {
     text-align: center;
     margin-bottom: 20px;
     font-family: 'Averia Serif Libre', cursive;
@@ -66,19 +66,19 @@ a, a.btn, .btn-group>a.btn {
     float: left;
     width: 100%;
 }
-    .header.docked {
+    #game-container .header.docked {
         margin-top: 10px;
         width: 50%;
     }
-    .header h1 {
+    #game-container .header h1 {
         margin-bottom: 0;
     }
-    .header h4 {
+    #game-container .header h4 {
         font-style: italic;
         margin: 0;
     }
 
-.header-right {
+#game-container .header-right {
     position: absolute;
     right: 0;
     top: 0;
@@ -87,28 +87,28 @@ a, a.btn, .btn-group>a.btn {
     margin: 10px 0 20px 0;
     height: 70px;
 }
-    .header-right h3 {
+    #game-container .header-right h3 {
         line-height: 50px;
     }
 
-.intro-title {
+#game-container .intro-title {
     clear: both;
     margin: 30px auto 0 auto;
 }
 
-.intro {
+#game-container .intro {
     clear: both;
     float: left;
     width: 100%;
 }
-    .intro .intro-features {
+    #game-container .intro .intro-features {
         text-align: left;
         width: 600px;
         margin: 30px auto;
         padding: 30px 0;
     }
 
-.progress-completed {
+#game-container .progress-completed {
     width: 100%;
     float: left;
     background-color: #DAA762;
@@ -118,7 +118,7 @@ a, a.btn, .btn-group>a.btn {
     font-size: 120%;
     font-family: 'Averia Serif Libre', cursive;
 }
-    .progress-completed .bar {
+    #game-container .progress-completed .bar {
         width: 0%;
         height: 100%;
         position: absolute;
@@ -126,21 +126,21 @@ a, a.btn, .btn-group>a.btn {
         left: 0;
         background-color: #BA8E54;
     }
-    .progress-completed .text {
+    #game-container .progress-completed .text {
         width: 100%;
         position: absolute;
         top: 0;
         left: 0;
     }
 
-.steps-holder {
+#game-container .steps-holder {
     clear: both;
     display: none;
     position: relative;
     width: 800px;
     height: 410px;
 }
-    .steps-holder .step-basic {
+    #game-container .steps-holder .step-basic {
         position: absolute;
         width: 800px;
         height: 100px;
@@ -148,17 +148,17 @@ a, a.btn, .btn-group>a.btn {
         top: 145px;
         z-index: 20;
     }
-        .steps-holder .step-basic.statsmode {
+        #game-container .steps-holder .step-basic.statsmode {
             height: 350px;
             top: 30px;
         }
-        .steps-holder .step-basic .stats-holder {
+        #game-container .steps-holder .step-basic .stats-holder {
             width: 500px;
             margin-left: 150px;
             padding-top: 20px;
             float: left;
         }
-            .steps-holder .step-basic .stats-holder label {
+            #game-container .steps-holder .step-basic .stats-holder label {
                 float: left;
                 width: 150px;
                 font-size: 140%;
@@ -166,22 +166,22 @@ a, a.btn, .btn-group>a.btn {
                 line-height: 30px;
                 margin-left: 50px;
             }
-                .steps-holder .step-basic .stats-holder label.newline {
+                #game-container .steps-holder .step-basic .stats-holder label.newline {
                     clear: both;
                     margin-left: 0;
                 }
-            .steps-holder .step-basic .stats-holder input {
+            #game-container .steps-holder .step-basic .stats-holder input {
                 float: left;
                 width: 50px;
             }
-            .steps-holder .step-basic .stats-holder a.btn {
+            #game-container .steps-holder .step-basic .stats-holder a.btn {
                 margin-top: 20px;
                 margin-left: 190px;
                 clear: both;
                 float: left;
             }
 
-    .steps-holder .step-basic-sub {
+    #game-container .steps-holder .step-basic-sub {
         position: absolute;
         width: 800px;
         height: 100px;
@@ -189,64 +189,64 @@ a, a.btn, .btn-group>a.btn {
         top: 145px;
         z-index: 10;
     }
-    .steps-holder .docked {
+    #game-container .steps-holder .docked {
         transform: translate(0, -130px) scale(0.8);
         -webkit-transform: translate(0, -130px) scale(0.8);
         -moz-transform: translate(0, -130px) scale(0.8);
         -o-transform: translate(0, -130px) scale(0.8);
         -ms-transform: translate(0, -130px) scale(0.8);
     }
-    .steps-holder .game-over {
+    #game-container .steps-holder .game-over {
         position: absolute;
         width: 800px;
         height: 200px;
         top: 100px;
     }
-        .steps-holder .game-over h3 {
+        #game-container .steps-holder .game-over h3 {
             font-weight: normal;
         }
-    .steps-holder .errors {
+    #game-container .steps-holder .errors {
         position: absolute;
         width: 600px;
         height: 300px;
         top: 100px;
         left: 100px;
     }
-        .steps-holder .errors h3 {
+        #game-container .steps-holder .errors h3 {
             font-weight: normal;
         }
 
-.next-step {
+#game-container .next-step {
     width: 100%;
     position: absolute;
     bottom: 0;
     background-color: #DAA762;
     padding: 10px 0;
 }
-    .next-step #give-up-button {
+    #game-container .next-step #give-up-button {
         float: left;
         margin-left: 20px;
     }
-    .next-step .next-section-holder {
+    #game-container .next-step .next-section-holder {
         float: right;
         margin-right: 20px;
         margin-left: 0;
     }
-        .next-step .next-section-holder a.off {
+        #game-container .next-step .next-section-holder a.off {
             cursor: default;
         }
 
-.your-answer-holder {
+#game-container .your-answer-holder {
     width: 100%;
     position: absolute;
     bottom: 20px;
     padding: 0;
     text-align: center;
 }
-    .your-answer-holder h3 {
+    #game-container .your-answer-holder h3 {
         font-weight: normal;
     }
-    .your-answer-holder.saving {
+    #game-container .your-answer-holder.saving {
         transform: translate(-350px, -380px) scale(0.1);
         -webkit-transform: translate(-350px, -380px) scale(0.1);
         -moz-transform: translate(-350px, -380px) scale(0.1);
@@ -255,7 +255,7 @@ a, a.btn, .btn-group>a.btn {
         opacity: 0.1;
     }
 
-.btn-custom {
+#game-container .btn-custom {
   background-color: hsl(29, 83%, 18%) !important;
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ed9644", endColorstr="#532c07");

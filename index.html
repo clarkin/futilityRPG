@@ -6,10 +6,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Futility RPG</title>
+    <title>Futility RPG - a game by Gambrinous</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
+    <style type="text/css" media="all">
+    <!--
+    @import url("/css/master.css");
+    -->
+    </style>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -17,98 +22,126 @@
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="off noswing">Futility RPG</h1>
-            <h4 class="off noswing">Can you stand it?</h4>
-        </div>
+    <div id="wrapper">
+        <div id="header" class="clearfix">
+            <div id="logo">
+                <img src="/img/gambrinous_logo_black.png" alt="Gambrinous" />
 
-        <div class="header-right off noswing">
-            <h3>Character Creation</h3>
-        </div>
-
-        <div class="intro">
-            <div class="intro-title off noswing">Welcome to the finest role playing computer game <b>ever made</b>!!</div>
-            <div class="intro-features off noswing">
-                <p>Get ready to</p>
-                <ul>
-                    <li>Explore a massive, living world spanning thousands of leagues</li>
-                    <li>Delve into deep dungeons filled with hundreds of different types of monsters</li>
-                    <li>Find, buy or craft your own incredible artifacts</li>
-                    <li>Research world-altering spells and powers</li>
-                    <li>Ascend to incredible power and then face the gods themselves!</li>
-                </ul>
             </div>
-            <div class="intro-button off noswing">
-                <p>But first - you must <b>create your character</b>..</p>
-                <a class="btn btn-custom" id="btnstart">Get Started</a>
+            <div id="blog-link">
+                <a href="http://blog.gambrinous.com"><img src="/img/gambrinous_blog.png" alt="Gambrinous Blog" /></a>
+            </div>
+            <div id="games-link">
+                <a href="http://www.gambrinousgames.com"><img src="/img/gambrinousgames.png" alt="Gambrinous Games" /></a>
             </div>
         </div>
 
-        <div class="progress-completed off">
-            <div class="bar"></div>
-            <div class="text off noswing">
-                <span class="section-number">Section 1 - </span><span class="percentage-complete">Completed 0%</span>
+        <div id="game-container">
+            <div class="header">
+                <h1 class="off noswing">Futility RPG</h1>
+                <h4 class="off noswing">Can you stand it?</h4>
             </div>
-        </div>
 
-        <div class="steps-holder">
+            <div class="header-right off noswing">
+                <h3>Character Creation</h3>
+            </div>
 
-            <div class="step-basic off">
-                <h2></h2>
-                <div class="btn-group btn-group-justified" data-toggle="buttons-radio">
-
+            <div class="intro">
+                <div class="intro-title off noswing">Welcome to the finest role playing computer game <b>ever made</b>!!</div>
+                <div class="intro-features off noswing">
+                    <p>Get ready to</p>
+                    <ul>
+                        <li>Explore a massive, living world spanning thousands of leagues</li>
+                        <li>Delve into deep dungeons filled with hundreds of different types of monsters</li>
+                        <li>Find, buy or craft your own incredible artifacts</li>
+                        <li>Research world-altering spells and powers</li>
+                        <li>Ascend to incredible power and then face the gods themselves!</li>
+                    </ul>
                 </div>
-                <div class="text-holder">
-                    <input type="text" class="form-control">
-                </div>
-                <div class="stats-holder">
-                    <label class="newline">Strength:</label> <input type="text" class="form-control" disabled="disabled">
-                    <label>Intelligence:</label> <input type="text" class="form-control" disabled="disabled">
-                    <label class="newline">Dexterity:</label> <input type="text" class="form-control" disabled="disabled">
-                    <label>Wisdom:</label> <input type="text" class="form-control" disabled="disabled">
-                    <label class="newline">Constitution:</label> <input type="text" class="form-control" disabled="disabled">
-                    <label>Charisma:</label> <input type="text" class="form-control" disabled="disabled">
-                    <a class="btn btn-custom" id="btnstats">Roll The Dice</a>
+                <div class="intro-button off noswing">
+                    <p>But first - you must <b>create your character</b>..</p>
+                    <a class="btn btn-custom" id="btnstart">Get Started</a>
                 </div>
             </div>
 
-            <div class="step-basic-sub off">
-                <h2></h2>
-                <div class="btn-group btn-group-justified" data-toggle="buttons-radio">
-
+            <div class="progress-completed off">
+                <div class="bar"></div>
+                <div class="text off noswing">
+                    <span class="section-number">Section 1 - </span><span class="percentage-complete">Completed 0%</span>
                 </div>
             </div>
 
-            <div class="your-answer-holder off">
-                <h3></h3>
+            <div class="steps-holder">
+
+                <div class="step-basic off">
+                    <h2></h2>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons-radio">
+
+                    </div>
+                    <div class="text-holder">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="stats-holder">
+                        <label class="newline">Strength:</label> <input type="text" class="form-control" disabled="disabled">
+                        <label>Intelligence:</label> <input type="text" class="form-control" disabled="disabled">
+                        <label class="newline">Dexterity:</label> <input type="text" class="form-control" disabled="disabled">
+                        <label>Wisdom:</label> <input type="text" class="form-control" disabled="disabled">
+                        <label class="newline">Constitution:</label> <input type="text" class="form-control" disabled="disabled">
+                        <label>Charisma:</label> <input type="text" class="form-control" disabled="disabled">
+                        <a class="btn btn-custom" id="btnstats">Roll The Dice</a>
+                    </div>
+                </div>
+
+                <div class="step-basic-sub off">
+                    <h2></h2>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons-radio">
+
+                    </div>
+                </div>
+
+                <div class="your-answer-holder off">
+                    <h3></h3>
+                </div>
+
+                <div class="game-over off">
+                    <h2>Game Over</h2>
+                    <h3>Your score was <b></b></h3>
+                    <p>
+                        Thanks for playing! <br />
+                        <br /><br />
+                        Created by Colm Larkin <br />
+                        <a href="https://twitter.com/gambrinous" target="_blank">@gambrinous</a>
+                    </p>
+                </div>
+
+                <div class="errors off">
+                    <h2>Error!</h2>
+                    <h3>Sorry that can't be done</h3>
+                </div>
+
             </div>
 
-            <div class="game-over off">
-                <h2>Game Over</h2>
-                <h3>Your score was <b></b></h3>
-                <p>
-                    Thanks for playing! <br />
-                    <br /><br />
-                    Created by Colm Larkin <br />
-                    <a href="https://twitter.com/gambrinous" target="_blank">@gambrinous</a>
-                </p>
+            <div class="next-step off">
+                <a id="give-up-button" class="btn btn-custom">Skip Character Creation</a>
+                <div class="next-section-holder off">
+                    <a id="next-section-button" class="btn btn-custom">Next Section</a>
+                </div>
             </div>
-
-            <div class="errors off">
-                <h2>Error!</h2>
-                <h3>Sorry that can't be done</h3>
-            </div>
-
         </div>
-
-        <div class="next-step off">
-            <a id="give-up-button" class="btn btn-custom">Skip Character Creation</a>
-            <div class="next-section-holder off">
-                <a id="next-section-button" class="btn btn-custom">Next Section</a>
-            </div>
+        <div id="footer">
+    	    &copy; Gambrinous 2008-2013
         </div>
     </div>
+
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-5639991-3");
+            pageTracker._trackPageview();
+        } catch (err) { }</script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
